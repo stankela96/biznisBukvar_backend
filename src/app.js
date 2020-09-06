@@ -4,6 +4,7 @@ import mongooose from "mongoose";
 import bodyParser from "body-parser";
 import cors from "cors";
 import example from "./routes/ex";
+const dotenv = require("dotenv").config();
 
 const app = express();
 app.use(bodyParser.json());
@@ -23,7 +24,7 @@ mongooose
   })
   .then(() => {
     console.log("app is online");
-    app.listen(5000);
+    app.listen(process.env.PORT);
   })
   .catch((err) => {
     console.log("ERROR");

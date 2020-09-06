@@ -35,16 +35,38 @@ export const formSubmission = async (req, res, next) => {
       },
     });
 
-    var mailingList = [process.env.MAILUSERNAME, process.env.TESTMAIL];
-
     let mailOptions = {
       from: process.env.MAILUSERNAME,
-      to: mailingList,
-      subject: "hello",
-      text: "Hello world?",
+      to: email,
+      subject: "Hvala što ste kupili knjigu",
+      text: "Hvala što ste kupili knjigu",
+    };
+
+    const userData = {
+      name,
+      address,
+      zipCode,
+      email,
+      city,
+      phone,
+      quantity,
+      approach,
+    };
+
+    let customerData = {
+      from: process.env.MAILUSERNAME,
+      to: process.env.MAILUSERNAME,
+      subject: "Podaci o kupcu",
+      text: JSON.stringify(userData),
     };
 
     await transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        return console.log(error);
+      }
+    });
+
+    await transporter.sendMail(customerData, (error, info) => {
       if (error) {
         return console.log(error);
       }
