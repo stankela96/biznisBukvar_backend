@@ -1,4 +1,4 @@
-import Form from "../models/form";
+import Form from "../models/formModel";
 import nodemailer from "nodemailer";
 const dotenv = require("dotenv").config();
 
@@ -16,14 +16,14 @@ export const formSubmission = async (req, res, next) => {
     } = req.body;
 
     const data = new Form({
-      name: name,
-      address: address,
-      zipCode: zipCode,
-      email: email,
-      city: city,
-      phone: phone,
-      quantity: quantity,
-      approach: approach,
+      name,
+      address,
+      zipCode,
+      email,
+      city,
+      phone,
+      quantity,
+      approach,
     });
     await data.save();
 
@@ -37,7 +37,7 @@ export const formSubmission = async (req, res, next) => {
 
     let mailOptions = {
       from: process.env.MAILUSERNAME,
-      to: email,
+      to: process.env.MAILUSERNAME,
       subject: "Hvala što ste kupili knjigu",
       text: "Hvala što ste kupili knjigu",
     };
@@ -57,7 +57,7 @@ export const formSubmission = async (req, res, next) => {
       from: process.env.MAILUSERNAME,
       to: process.env.MAILUSERNAME,
       subject: "Podaci o kupcu",
-      text: JSON.stringify(userData),
+      html: userData,
     };
 
     await transporter.sendMail(mailOptions, (error, info) => {

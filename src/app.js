@@ -3,7 +3,7 @@ import express from "express";
 import mongooose from "mongoose";
 import bodyParser from "body-parser";
 import cors from "cors";
-import example from "./routes/ex";
+import example from "./routes/formRouter";
 const dotenv = require("dotenv").config();
 
 const app = express();

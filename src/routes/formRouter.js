@@ -1,5 +1,5 @@
 import express from "express";
-import { formSubmission } from "../controllers/example";
+import { formSubmission } from "../controllers/formController";
 const router = express.Router();
 
 router.post("/", formSubmission);
