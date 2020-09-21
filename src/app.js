@@ -9,7 +9,7 @@ const dotenv = require("dotenv").config();
 const app = express();
 app.use(bodyParser.json());
 const corsOptions = {
-  exposedHeaders: "Authorization",
+  origin : '*'
 };
 
 app.use(express.json());
